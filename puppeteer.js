@@ -23,7 +23,7 @@ function crawlPage() {
             width: 1920,
             height: 1080
         });
-        await page.goto("http://news.ycombinator.com", {
+        await page.goto("https://lobste.rs/", {
             waitUntil: 'networkidle2',
             timeout: 300000
         });
