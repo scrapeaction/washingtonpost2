@@ -36,12 +36,14 @@ function crawlPage() {
             const name = addresses[i].lastIndexOf('/');
             console.log({ name });
             await page.goto(addresses[i], { "waitUntil": "networkidle2", timeout: 300000 })
-            await page.screenshot({
-                path: `screenshots/screenshots-${i}.png`,
-                fullPage: true
-            })().catch((error) => {
+            try {
+                await page.screenshot({
+                    path: `screenshots/screenshots-${i}.png`,
+                    fullPage: true
+                });
+            } catch (error) {
                 console.error(error);
-            });
+            };
         }
 
         await page.close();
