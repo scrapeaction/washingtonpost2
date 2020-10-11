@@ -23,7 +23,7 @@ function crawlPage() {
             width: 1920,
             height: 1080
         });
-        await page.goto("https://lobste.rs/", {
+        await page.goto("https://old.reddit.com/user/7165015874/m/buy/", {
             waitUntil: 'networkidle2',
             timeout: 300000
         });
@@ -34,6 +34,7 @@ function crawlPage() {
         for (let i = 0; i < addresses.length; i++) {
             console.log(addresses[i]);
             const name = addresses[i].lastIndexOf('/');
+            console.log({ name });
             await page.goto(addresses[i], { "waitUntil": "networkidle2", timeout: 300000 })
             await page.screenshot({
                 path: `screenshots/screenshots-${i}.png`,
