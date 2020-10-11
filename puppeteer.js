@@ -23,9 +23,9 @@ function crawlPage() {
             width: 1920,
             height: 1080
         });
-        await page.goto("http://nytimes.com", {
+        await page.goto("http://washingtonpost.com/", {
             waitUntil: 'networkidle2',
-            timeout: 30000
+            timeout: 300000
         });
 
         const addresses = await page.$$eval('a', as => as.map(a => a.href));
