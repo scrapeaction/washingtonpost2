@@ -35,8 +35,8 @@ function crawlPage() {
             console.log(addresses[i]);
             const name = addresses[i].lastIndexOf('/');
             console.log({ name });
-            await page.goto(addresses[i], { "waitUntil": "networkidle2", timeout: 300000 })
             try {
+                await page.goto(addresses[i], { "waitUntil": "networkidle2", timeout: 300000 });
                 await page.screenshot({
                     path: `screenshots/screenshots-${i}.png`,
                     fullPage: true
