@@ -23,7 +23,7 @@ function crawlPage() {
             width: 1920,
             height: 1080
         });
-        await page.goto("https://old.reddit.com/user/7165015874/m/buy/", {
+        await page.goto("https://slickdeals.net/deals/", {
             waitUntil: 'networkidle2',
             timeout: 300000
         });
@@ -39,6 +39,8 @@ function crawlPage() {
             await page.screenshot({
                 path: `screenshots/screenshots-${i}.png`,
                 fullPage: true
+            })().catch((error) => {
+                console.error(error);
             });
         }
 
