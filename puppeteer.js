@@ -15,12 +15,12 @@ function crawlPage() {
         const args = [
             "--disable-setuid-sandbox",
             "--no-sandbox",
-            "--blink-settings=imagesEnabled=false",
+            "--blink-settings=imagesEnabled=true",
         ];
         const options = {
             args,
-            headless: true,
-            ignoreHTTPSErrors: true,
+            headless: false,
+            ignoreHTTPSErrors: true
         };
 
         const browser = await puppeteer.launch(options);
@@ -37,26 +37,12 @@ function crawlPage() {
         const addresses = await page.$$eval('a', as => as.map(a => a.href));
 
         for (let i = 0; i < addresses.length; i++) {
-            console.log(addresses[i]);
+            console.log(`Now serving ${i} of ${addresses.length}: ${addresses[i]}`);
             try {
                 await page.goto(addresses[i], { waitUntil: "networkidle0", timeout: 0 });
 
-                await page.evaluate(async () => {
-                    // Scroll down to bottom of page to activate lazy loading images
-                    document.body.scrollIntoView(false);
-
-                    // Wait for all remaining lazy loading images to load
-                    await Promise.all(Array.from(document.getElementsByTagName('img'), image => {
-                        if (image.complete) {
-                            return;
-                        }
-
-                        return new Promise((resolve, reject) => {
-                            image.addEventListener('load', resolve);
-                            image.addEventListener('error', reject);
-                        });
-                    }));
-                });
+                const watchDog = page.waitForFunction(() => 'window.status === "ready"', { timeout: 0 });
+                await watchDog;
 
                 await delay(4000);
                 console.log(`waited for four seconds`);
@@ -70,6 +56,8 @@ function crawlPage() {
                 });
             } catch (error) {
                 console.error(error);
+            } finally {
+                console.log(`Finished serving ${i} of ${addresses.length}: ${addresses[i]}`);
             };
         }
 
