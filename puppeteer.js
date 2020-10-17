@@ -19,7 +19,7 @@ function crawlPage() {
         ];
         const options = {
             args,
-            headless: false,
+            headless: true,
             ignoreHTTPSErrors: true
         };
 
