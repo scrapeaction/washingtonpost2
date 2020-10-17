@@ -30,7 +30,7 @@ function crawlPage() {
             height: 1080
         });
         
-        await page.goto("https://slickdeals.net/deals", {
+        await page.goto("https://jami.net", {
             waitUntil: 'networkidle0',
             timeout: 0
         });
