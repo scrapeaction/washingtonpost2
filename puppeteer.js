@@ -23,23 +23,28 @@ function crawlPage() {
             width: 1920,
             height: 1080
         });
-        await page.goto("https://slickdeals.net/deals/", {
-            waitUntil: 'networkidle2',
+        await page.goto("https://nytimes.com", {
+            waitUntil: 'networkidle0',
             timeout: 300000
         });
 
         const addresses = await page.$$eval('a', as => as.map(a => a.href));
-        console.log(addresses);
 
         for (let i = 0; i < addresses.length; i++) {
             console.log(addresses[i]);
-            const name = addresses[i].lastIndexOf('/');
+            const nameStart = addresses[i].lastIndexOf('/');
+            const nameEnd = addresses[i].lastIndexOf('#');
+            const name = addresses[i].substring(nameStart + 1, nameEnd);
             console.log({ name });
             try {
-                await page.goto(addresses[i], { "waitUntil": "networkidle2", timeout: 300000 });
+                await page.goto(addresses[i], { "waitUntil": "networkidle0", timeout: 300000 });
                 await page.screenshot({
-                    path: `screenshots/screenshots-${i}.png`,
+                    path: `screenshots/screenshots-${name}-${i}.png`,
                     fullPage: true
+                });
+                await page.screenshot({
+                    path: `screenshots/screenshots-${name}-${i}-fold.png`,
+                    fullPage: false
                 });
             } catch (error) {
                 console.error(error);
