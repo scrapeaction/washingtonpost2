@@ -37,7 +37,7 @@ function crawlPage(url, prefix) {
         });
 
         const addresses = await page.$$eval('a', as => as.map(a => a.href));
-
+        const padding = addresses.length % 10;
         for (let i = 0; i < addresses.length; i++) {
             console.log(`Now serving ${i} of ${addresses.length}: ${addresses[i]}`);
             try {
@@ -48,7 +48,7 @@ function crawlPage(url, prefix) {
                     await watchDog;
 
                     await page.screenshot({
-                        path: `screenshots/${prefix}-${i}.png`,
+                        path: `screenshots/${prefix}-${i.toString().padStart(padding, '0')}.png`,
                         fullPage: true
                     });
                     await page.screenshot({
