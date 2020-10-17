@@ -29,7 +29,8 @@ function crawlPage() {
             width: 1920,
             height: 1080
         });
-        await page.goto("https://nytimes.com", {
+        
+        await page.goto("https://slickdeals.net/deals", {
             waitUntil: 'networkidle0',
             timeout: 0
         });
