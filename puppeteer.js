@@ -1,12 +1,27 @@
 'use strict';
 const puppeteer = require('puppeteer');
 
-crawlPage("https://news.ycombinator.com/", "frontpage");
-crawlPage("https://news.ycombinator.com/newest", "new");
-crawlPage("https://news.ycombinator.com/best", "best");
-crawlPage("https://news.ycombinator.com/ask", "ask");
-crawlPage("https://news.ycombinator.com/show", "show");
-crawlPage("https://news.ycombinator.com/jobs", "jobs");
+crawlPage("https://www.nytimes.com/", "frontpage");
+crawlPage("https://www.nytimes.com/section/world", "world");
+crawlPage("https://www.nytimes.com/section/us", "us");
+crawlPage("https://www.nytimes.com/section/politics", "politics");
+crawlPage("https://www.nytimes.com/section/nyregion", "nyregion");
+crawlPage("https://www.nytimes.com/section/business", "business");
+crawlPage("https://www.nytimes.com/section/opinion", "opinion");
+crawlPage("https://www.nytimes.com/section/technology", "technology");
+crawlPage("https://www.nytimes.com/section/science", "science");
+crawlPage("https://www.nytimes.com/section/health", "health");
+crawlPage("https://www.nytimes.com/section/sports", "sports");
+crawlPage("https://www.nytimes.com/section/arts", "arts");
+crawlPage("https://www.nytimes.com/section/books", "books");
+crawlPage("https://www.nytimes.com/section/style", "style");
+crawlPage("https://www.nytimes.com/section/food", "food");
+crawlPage("https://www.nytimes.com/section/travel", "travel");
+crawlPage("https://www.nytimes.com/section/magazine", "magazine");
+crawlPage("https://www.nytimes.com/section/t-magazine", "times-magazine");
+crawlPage("https://www.nytimes.com/section/realestate", "real-estate");
+crawlPage("https://www.nytimes.com/section/video", "video");
+
 
 
 
@@ -53,11 +68,11 @@ function crawlPage(url, prefix) {
                 await watchDog;
 
                 await page.screenshot({
-                    path: `screenshots/${prefix}-screenshots-${i}.png`,
+                    path: `screenshots/${prefix}-${i}.png`,
                     fullPage: true
                 });
                 await page.screenshot({
-                    path: `screenshots/${prefix}-screenshots-${i}-fold.png`,
+                    path: `screenshots/${prefix}-${i}-fold.png`,
                     fullPage: false
                 });
             } catch (error) {
