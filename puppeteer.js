@@ -1,12 +1,28 @@
 'use strict';
 const puppeteer = require('puppeteer');
 
-crawlPage("https://news.ycombinator.com/", "frontpage");
-crawlPage("https://news.ycombinator.com/newest", "new");
-crawlPage("https://news.ycombinator.com/best", "best");
-crawlPage("https://news.ycombinator.com/ask", "ask");
-crawlPage("https://news.ycombinator.com/show", "show");
-crawlPage("https://news.ycombinator.com/jobs", "jobs");
+crawlPage("https://washingtonpost.com", "frontpage");
+crawlPage("https://washingtonpost.com/todays_paper/updates/", "todays-papeer");
+crawlPage("https://washingtonpost.com/politics/", "politics");
+crawlPage("https://washingtonpost.com/opinions", "opinions");
+crawlPage("https://washingtonpost.com/national/investigations", "investigations");
+crawlPage("https://washingtonpost.com/business/technology", "technology");
+crawlPage("https://washingtonpost.com/world", "world");
+crawlPage("https://washingtonpost.com/dc", "dc");
+crawlPage("https://washingtonpost.com/sports", "sports");
+crawlPage("https://washingtonpost.com/race-america", "race-and-reckoning");
+crawlPage("https://washingtonpost.com/entertainment", "arts-and-entertainment");
+crawlPage("https://washingtonpost.com/business", "business");
+crawlPage("https://washingtonpost.com/personal-finance", "personal-finance");
+crawlPage("https://washingtonpost.com/climate-environment", "climante-and-environment");
+crawlPage("https://washingtonpost.com/elections", "elections");
+crawlPage("https://washingtonpost.com/immigration", "immigration");
+crawlPage("https://washingtonpost.com/transportation", "transportation");
+crawlPage("https://washingtonpost.com/travel", "travel");
+crawlPage("https://washingtonpost.com/video-games", "video-games");
+crawlPage("https://washingtonpost.com/outlook", "outlook");
+crawlPage("https://washingtonpost.com/outlook/five-myths", "five-myths");
+
 
 function delay(time) {
     return new Promise(function (resolve) {
