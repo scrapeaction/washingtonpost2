@@ -1,8 +1,11 @@
 'use strict';
 const puppeteer = require('puppeteer');
 
+const start_time = Date.now();
+const total_allowed_time = (((5 * 60) + 30) * 60) * 1000;
+
 crawlPage("https://washingtonpost.com", "frontpage");
-crawlPage("https://washingtonpost.com/todays_paper/updates/", "todays-papeer");
+crawlPage("https://washingtonpost.com/todays_paper/updates/", "todays-paper");
 crawlPage("https://washingtonpost.com/politics/", "politics");
 crawlPage("https://washingtonpost.com/opinions", "opinions");
 crawlPage("https://washingtonpost.com/national/investigations", "investigations");
@@ -22,7 +25,6 @@ crawlPage("https://washingtonpost.com/travel", "travel");
 crawlPage("https://washingtonpost.com/video-games", "video-games");
 crawlPage("https://washingtonpost.com/outlook", "outlook");
 crawlPage("https://washingtonpost.com/outlook/five-myths", "five-myths");
-
 
 function delay(time) {
     return new Promise(function (resolve) {
@@ -69,11 +71,11 @@ function crawlPage(url, prefix) {
         const padding = addresses.length % 10;
         for (let i = 0; i < addresses.length; i++) {
             try {
-                if (addresses[i].startsWith("http") === true) {
+                if (Date.now() - start_time < total_allowed_time && addresses[i].startsWith("http") === true) {
                     console.log(`Now serving ${i} of ${addresses.length}: ${addresses[i]}`);
-                    await page.goto(addresses[i], { waitUntil: "networkidle0", timeout: 300000 });
+                    await page.goto(addresses[i], { waitUntil: "networkidle0", timeout: 30000 });
 
-                    const watchDog = page.waitForFunction(() => 'window.status === "ready"', { timeout: 300000 });
+                    const watchDog = page.waitForFunction(() => 'window.status === "ready"', { timeout: 30000 });
                     await watchDog;
 
                     await page.screenshot({
