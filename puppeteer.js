@@ -1,8 +1,12 @@
 'use strict';
 const puppeteer = require('puppeteer');
 
-crawlPage("https://slickdeals.net/", "front-page");
-crawlPage("https://slickdeals.net/deals/", "popular-deals");
+crawlPage("https://news.ycombinator.com/", "frontpage");
+crawlPage("https://news.ycombinator.com/newest", "new");
+crawlPage("https://news.ycombinator.com/best", "best");
+crawlPage("https://news.ycombinator.com/ask", "ask");
+crawlPage("https://news.ycombinator.com/show", "show");
+crawlPage("https://news.ycombinator.com/jobs", "jobs");
 
 function delay(time) {
     return new Promise(function (resolve) {
